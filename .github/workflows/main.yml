@@ -37,7 +37,7 @@ jobs:
           # PACKAGE_EXTRA_OPTS: -oss -bt mvn
           SC_SAST_SENSOR_VERSION: 24.4.0
           # EXTRA_SC_SAST_SCAN_OPTS: 
-          # DO_WAIT: true
+            DO_WAIT: true
           # DO_POLICY_CHECK: true
           # POLICY_CHECK_ACTION: https://scm.my.org/shared-repos/fcli-actions/check-policy.yaml
           # POLICY_CHECK_EXTRA_OPTS: --on-unsigned=ignore
@@ -47,7 +47,7 @@ jobs:
           # DO_PR_COMMENT: true
           # PR_COMMENT_ACTION: https://scm.my.org/shared-repos/fcli-actions/github-pr-comment.yaml
           # PR_COMMENT_EXTRA_OPTS: --on-unsigned=ignore
-          # DO_EXPORT: true
+            DO_EXPORT: true
           # EXPORT_ACTION: https://scm.my.org/shared-repos/fcli-actions/github-sast-report.yaml
           # EXPORT_EXTRA_OPTS: --on-unsigned=ignore
           # TOOL_DEFINITIONS: https://ftfy.mycompany.com/tool-definitions/v1/tool-definitions.yaml.zip
