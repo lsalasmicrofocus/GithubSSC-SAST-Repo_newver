@@ -36,3 +36,32 @@
           # EXPORT_ACTION: https://scm.my.org/shared-repos/fcli-actions/github-sast-report.yaml
           # EXPORT_EXTRA_OPTS: --on-unsigned=ignore
           # TOOL_DEFINITIONS: https://ftfy.mycompany.com/tool-definitions/v1/tool-definitions.yaml.zip
+
+name: 'Perform SAST scan'
+description: 'Perform a SAST scan on ScanCentral SAST'
+author: 'Fortify'
+runs:
+  using: composite
+  steps:
+    - uses: fortify/github-action/internal/set-ssc-var-defaults@main
+    - uses: fortify/github-action/setup@main
+      with:
+        export-path: false
+        fcli: action-default
+        debricked-cli: ${{ env.DO_DEBRICKED_SCAN=='true' && 'action-default' || 'skip' }}
+    - uses: fortify/github-action/internal/ssc-login@main
+    - uses: fortify/github-action/internal/sc-sast-login@main
+    - uses: fortify/github-action/package@main
+    - uses: fortify/github-action/internal/run-script@main
+      with:
+        script: sc-sast-and-debricked-scan.sh
+      env: 
+        DO_SC_SAST_SCAN: true
+        GITHUB_TOKEN: ${{ github.token }}
+    - if: env.DO_EXPORT == 'true'
+      uses: fortify/github-action/ssc-export@main
+        
+branding:
+  icon: 'shield'
+  color: 'blue'
+
